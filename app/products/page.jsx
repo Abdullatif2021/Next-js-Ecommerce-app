@@ -11,8 +11,8 @@ export default function ProductsPage() {
   const { dispatch, cart } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [showSignOutModal, setShowSignOutModal] = useState(false); // State for sign-out confirmation
-  const [addedToCart, setAddedToCart] = useState(null); // Track added product for animation
+  const [showSignOutModal, setShowSignOutModal] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,7 +31,7 @@ export default function ProductsPage() {
     }
     dispatch({ type: 'ADD_TO_CART', product, quantity: 1 });
     setAddedToCart(product.id);
-    setTimeout(() => setAddedToCart(null), 1000); // Animation duration for adding to cart
+    setTimeout(() => setAddedToCart(null), 1000);
   };
 
   const handleSignOut = () => {
@@ -46,7 +46,6 @@ export default function ProductsPage() {
 
   return (
     <div className='min-h-screen bg-gray-100'>
-      {/* Header */}
       <header className='bg-gray-800 text-white py-4 px-8 flex justify-between items-center'>
         <h1 className='text-2xl font-bold'>Shoezz</h1>
 
@@ -82,7 +81,6 @@ export default function ProductsPage() {
         </div>
       </header>
 
-      {/* Sign-In Prompt Modal */}
       {showSignInModal && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
           <div className='bg-white p-12 rounded-lg shadow-lg text-center'>
@@ -106,7 +104,6 @@ export default function ProductsPage() {
         </div>
       )}
 
-      {/* Sign-Out Confirmation Modal */}
       {showSignOutModal && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
           <div className='bg-white p-12 rounded-lg shadow-lg text-center'>
@@ -127,7 +124,6 @@ export default function ProductsPage() {
         </div>
       )}
 
-      {/* Featured Product Banner */}
       <section className='bg-gradient-to-r from-blue-100 to-purple-100 py-16 px-8 flex justify-center'>
         <div className='relative w-full max-w-5xl flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-8 p-8 rounded-2xl shadow-lg bg-white transition-transform duration-300 transform hover:scale-105'>
           <div className='flex flex-col justify-center items-start text-left space-y-4 md:w-1/2'>
@@ -153,7 +149,6 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Products Grid */}
       <main className='py-10 px-8'>
         <h2 className='text-2xl font-semibold text-[#6d5454] mb-6'>
           Featured Products

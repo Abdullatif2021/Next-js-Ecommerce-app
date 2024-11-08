@@ -1,4 +1,3 @@
-// app/admin/products/page.js
 'use client';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -25,7 +24,7 @@ const schema = yup.object().shape({
       'fileSize',
       'File size is too large',
       (value) => !value || (value && value.size <= 2000000)
-    ) // 2MB file size limit
+    )
     .test(
       'fileType',
       'Unsupported file format',
@@ -113,7 +112,7 @@ export default function ProductsPage() {
     setIsModalOpen(!isModalOpen);
     setImageBase64(null);
     setSelectedProduct(null);
-    reset(); // Clear the form fields
+    reset();
   };
 
   const onSubmit = async (data) => {
@@ -133,7 +132,7 @@ export default function ProductsPage() {
           : [...products, newProduct]
       );
       toggleModal();
-      reset(); // Clear the form fields after submission
+      reset();
     } catch (error) {
       console.error('Error saving product:', error);
     }
@@ -155,7 +154,7 @@ export default function ProductsPage() {
         setImageBase64(reader.result);
       };
       reader.readAsDataURL(file);
-      setValue('image', file); // Update the form value for validation
+      setValue('image', file);
     }
   };
 
@@ -229,7 +228,6 @@ export default function ProductsPage() {
         </button>
       </div>
 
-      {/* Modal for Adding/Editing Product */}
       {isModalOpen && (
         <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
           <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-md'>
@@ -320,7 +318,6 @@ export default function ProductsPage() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
           <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center'>

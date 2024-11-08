@@ -1,21 +1,19 @@
-// app/admin/users/page.js
 'use client';
 import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for add-user modal
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     email: '',
     password: '',
     isAdmin: false,
   });
-  const [userToDelete, setUserToDelete] = useState(null); // State to hold the user ID for deletion
+  const [userToDelete, setUserToDelete] = useState(null);
 
   useEffect(() => {
-    // Fetch users from the API
     const fetchUsers = async () => {
       const res = await fetch('/api/users');
       const data = await res.json();
@@ -41,21 +39,21 @@ export default function UsersPage() {
       body: JSON.stringify(newUser),
     });
     const data = await res.json();
-    setUsers([...users, data]); // Add new user to the list
-    setIsModalOpen(false); // Close modal
-    setNewUser({ email: '', password: '', isAdmin: false }); // Reset form
+    setUsers([...users, data]);
+    setIsModalOpen(false);
+    setNewUser({ email: '', password: '', isAdmin: false });
   };
 
   const confirmDeleteUser = (id) => {
-    setUserToDelete(id); // Set the user to delete
-    setIsDeleteModalOpen(true); // Open confirmation modal
+    setUserToDelete(id);
+    setIsDeleteModalOpen(true);
   };
 
   const deleteUser = async () => {
     await fetch(`/api/users?id=${userToDelete}`, { method: 'DELETE' });
     setUsers(users.filter((user) => user.id !== userToDelete));
-    setIsDeleteModalOpen(false); // Close confirmation modal
-    setUserToDelete(null); // Clear the user ID
+    setIsDeleteModalOpen(false);
+    setUserToDelete(null);
   };
 
   return (
@@ -95,7 +93,6 @@ export default function UsersPage() {
         </tbody>
       </table>
 
-      {/* Modal for adding a new user */}
       {isModalOpen && (
         <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
           <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-md'>
@@ -151,7 +148,6 @@ export default function UsersPage() {
         </div>
       )}
 
-      {/* Confirmation Modal for Deleting a User */}
       {isDeleteModalOpen && (
         <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
           <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center'>

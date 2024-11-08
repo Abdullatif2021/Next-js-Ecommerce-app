@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react'; // Import signIn for automatic login
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function SignUpPage() {
@@ -12,8 +12,8 @@ export default function SignUpPage() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [loading, setLoading] = useState(false); // Loading state for the spinner
-  const [success, setSuccess] = useState(false); // Success state for button color change
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
 
   const handleSignUp = async (e) => {
@@ -22,9 +22,8 @@ export default function SignUpPage() {
     setEmailError('');
     setPasswordError('');
     setConfirmPasswordError('');
-    setLoading(true); // Set loading to true when sign-up starts
+    setLoading(true);
 
-    // Basic validation
     let isValid = true;
     if (!email) {
       setEmailError('Email is required.');
@@ -43,7 +42,7 @@ export default function SignUpPage() {
     }
 
     if (!isValid) {
-      setLoading(false); // Stop loading if validation fails
+      setLoading(false);
       return;
     }
 
@@ -57,7 +56,6 @@ export default function SignUpPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // Automatically sign in the user after successful signup
         const loginResult = await signIn('credentials', {
           redirect: false,
           email,
@@ -65,21 +63,21 @@ export default function SignUpPage() {
         });
 
         if (!loginResult.error) {
-          setSuccess(true); // Set success state to true
+          setSuccess(true);
           setTimeout(() => {
-            router.push('/products'); // Redirect after a short delay
+            router.push('/products');
           }, 1000);
         } else {
           setError('Failed to sign in automatically. Please sign in manually.');
-          setLoading(false); // Stop loading on error
+          setLoading(false);
         }
       } else {
         setError(data.error || 'An error occurred during sign up.');
-        setLoading(false); // Stop loading on error
+        setLoading(false);
       }
     } catch (error) {
       setError('Failed to sign up. Please try again later.');
-      setLoading(false); // Stop loading on error
+      setLoading(false);
     }
   };
 
@@ -131,7 +129,7 @@ export default function SignUpPage() {
           </div>
           <button
             type='submit'
-            disabled={loading || success} // Disable button during loading and success
+            disabled={loading || success}
             className={`w-full py-3 rounded-lg transition duration-200 flex items-center justify-center ${
               success
                 ? 'bg-blue-500 text-white'

@@ -1,4 +1,3 @@
-// app/page.js
 'use client';
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
@@ -9,14 +8,14 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'loading') return; // Wait until session is loaded
+    if (status === 'loading') return;
 
     if (session?.user?.isAdmin) {
-      router.push('/admin'); // Redirect to admin if user is an admin
+      router.push('/admin');
     } else {
-      router.push('/products'); // Redirect to products if not admin
+      router.push('/products');
     }
   }, [session, status, router]);
 
-  return null; // No need to render anything on this page
+  return null;
 }

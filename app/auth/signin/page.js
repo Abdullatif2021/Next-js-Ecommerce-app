@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation'; // Use Next.js router for navigation
+import { useRouter } from 'next/navigation';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
@@ -10,8 +10,8 @@ export default function SignInPage() {
   const [error, setError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [loading, setLoading] = useState(false); // Loading state for the spinner
-  const [success, setSuccess] = useState(false); // Success state for button color change
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
 
   const handleSignIn = async (e) => {
@@ -19,9 +19,8 @@ export default function SignInPage() {
     setError('');
     setEmailError('');
     setPasswordError('');
-    setLoading(true); // Set loading to true when sign-in starts
+    setLoading(true);
 
-    // Field validation
     let isValid = true;
     if (!email) {
       setEmailError('Email is required.');
@@ -33,7 +32,7 @@ export default function SignInPage() {
     }
 
     if (!isValid) {
-      setLoading(false); // Stop loading if validation fails
+      setLoading(false);
       return;
     }
 
@@ -45,11 +44,11 @@ export default function SignInPage() {
 
     if (!result || result.error) {
       setError('Invalid email or password.');
-      setLoading(false); // Stop loading on error
+      setLoading(false);
     } else {
-      setSuccess(true); // Set success to true on successful sign-in
+      setSuccess(true);
       setTimeout(() => {
-        router.push('/'); // Redirect after a short delay
+        router.push('/');
       }, 1000);
     }
   };
@@ -88,7 +87,7 @@ export default function SignInPage() {
           </div>
           <button
             type='submit'
-            disabled={loading || success} // Disable button during loading and success
+            disabled={loading || success}
             className={`w-full py-3 rounded-lg transition duration-200 flex items-center justify-center ${
               success
                 ? 'bg-green-500 text-white'

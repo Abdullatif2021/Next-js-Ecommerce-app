@@ -1,4 +1,3 @@
-// app/cart/page.js
 'use client';
 
 import { useCart } from '../context/CartContext';
@@ -30,12 +29,11 @@ export default function CartPage() {
   };
 
   const proceedToCheckout = () => {
-    router.push('/payment'); // Navigate to the payment page
+    router.push('/payment');
   };
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-blue-50 to-gray-100'>
-      {/* Header */}
       <header className='bg-blue-600 text-white py-6 px-8 flex justify-between items-center shadow-lg'>
         <h1 className='text-3xl font-bold'>Shopping Cart</h1>
         <Link href='/'>
@@ -45,7 +43,6 @@ export default function CartPage() {
         </Link>
       </header>
 
-      {/* Cart Items */}
       <main className='py-10 px-8'>
         {cart.length === 0 ? (
           <div className='text-center'>

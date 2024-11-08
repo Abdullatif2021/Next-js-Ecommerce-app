@@ -1,6 +1,5 @@
-// app/api/users/route.js
 import prisma from '../../../lib/prisma';
-import bcrypt from 'bcrypt'; // Import bcrypt for password hashing
+import bcrypt from 'bcrypt';
 
 export async function GET(req) {
   try {
@@ -17,7 +16,7 @@ export async function GET(req) {
 export async function DELETE(req) {
   try {
     const url = new URL(req.url);
-    const userId = url.searchParams.get('id'); // Retrieve the `id` from the query parameters
+    const userId = url.searchParams.get('id');
 
     if (!userId) {
       return new Response(JSON.stringify({ error: 'User ID is required' }), {
@@ -26,7 +25,7 @@ export async function DELETE(req) {
     }
 
     await prisma.user.delete({
-      where: { id: parseInt(userId) }, // Assuming userId is an integer
+      where: { id: parseInt(userId) },
     });
 
     return new Response(
@@ -41,7 +40,6 @@ export async function DELETE(req) {
   }
 }
 
-// Add new user (POST)
 export async function POST(req) {
   try {
     const { email, password, isAdmin } = await req.json();
@@ -55,14 +53,13 @@ export async function POST(req) {
       );
     }
 
-    // Hash the password before storing it in the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
-        isAdmin: isAdmin || false, // Default to false if isAdmin is not provided
+        isAdmin: isAdmin || false,
       },
     });
 

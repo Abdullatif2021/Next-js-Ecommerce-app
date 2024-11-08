@@ -1,4 +1,3 @@
-// app/payment/page.js
 'use client';
 
 import { useCart } from '../context/CartContext';
@@ -22,7 +21,6 @@ export default function FakePaymentPage() {
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4'>
       <div className='bg-white p-6 rounded-lg shadow-lg max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8'>
-        {/* Left Section: Payment Method */}
         <div className='space-y-6'>
           <h2 className='text-2xl font-bold mb-4'>Select Payment Method</h2>
 
@@ -63,7 +61,6 @@ export default function FakePaymentPage() {
             </div>
           </div>
 
-          {/* Credit Card Information */}
           <div className='mt-8 space-y-4'>
             <h3 className='text-xl font-bold text-gray-700'>
               Pay using credit card
@@ -103,7 +100,6 @@ export default function FakePaymentPage() {
           </div>
         </div>
 
-        {/* Right Section: Order Summary */}
         <div className='bg-gray-100 p-6 rounded-lg'>
           <h3 className='text-xl font-bold mb-4'>Order Summary</h3>
           <div className='space-y-4'>

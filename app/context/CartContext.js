@@ -28,7 +28,7 @@ const cartReducer = (state, action) => {
     case 'SET_CART':
       return action.cart;
     case 'CLEAR_CART':
-      return []; // Initialize cart from localStorage
+      return [];
     default:
       return state;
   }
@@ -37,7 +37,6 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
 
-  // Load cart from localStorage when the component mounts
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
@@ -45,7 +44,6 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);

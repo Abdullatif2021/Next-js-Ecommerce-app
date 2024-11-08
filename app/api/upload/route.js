@@ -4,7 +4,7 @@ import formidable from 'formidable';
 
 export const config = {
   api: {
-    bodyParser: false, // Disables the built-in body parser to handle form-data manually
+    bodyParser: false,
   },
 };
 
@@ -22,14 +22,11 @@ export async function POST(req) {
       }
 
       try {
-        // Extract fields and base64 string from the form data
         const { name, description, price, category, stock, imageBase64 } =
           fields;
 
-        // Store image as base64 directly in the database
         const imageUrl = `data:image/jpeg;base64,${imageBase64}`;
 
-        // Create the product in the database
         const product = await prisma.product.create({
           data: {
             name,

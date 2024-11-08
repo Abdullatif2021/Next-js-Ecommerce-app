@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function AdminLayout({ children }) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const pathname = usePathname(); // Get current route
+  const pathname = usePathname();
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -30,7 +30,6 @@ export default function AdminLayout({ children }) {
 
   return (
     <div className='flex min-h-screen bg-gray-100'>
-      {/* Sidebar */}
       <aside className='w-64 bg-gray-800 text-white flex flex-col justify-between p-5'>
         <div>
           <h2 className='text-2xl font-bold mb-6'>Admin Dashboard</h2>
@@ -56,7 +55,6 @@ export default function AdminLayout({ children }) {
         </button>
       </aside>
 
-      {/* Main Content */}
       <main className='flex-1 p-8 bg-white shadow-lg'>{children}</main>
     </div>
   );
